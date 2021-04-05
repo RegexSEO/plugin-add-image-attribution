@@ -89,6 +89,7 @@ function image_attribution_update_content($content)
         }
 
         $attributionElParent = $htmlContent->createElement('div');
+        $attributionElParent->setAttribute('class', 'image-attribution-link-wrapper');
         $attributionElParent->appendChild($attributionEl);
 
         try {
@@ -105,3 +106,14 @@ function image_attribution_update_content($content)
 }
 
 add_filter('the_content', 'image_attribution_update_content', 6);
+
+// Image Attribution Append Custom CSS
+function image_attribution_custom_css()
+{
+    echo '<style>
+/** Image Attribution Link Styles Below - Edit from Settings > Image Attribution Settings **/
+' . get_option('image_attribution_css') . '
+</style>
+';
+}
+add_action('wp_head', 'image_attribution_custom_css');
